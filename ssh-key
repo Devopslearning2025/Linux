@@ -1,0 +1,19 @@
+ADD USER WITH SSH Key-Based AUTHENTICATION:
+-----------------------------------------------
+Using SSH public key authentication to connect to a remote system is a robust, more secure alternative to logging in with an account password or passphrase. SSH public key authentication relies on asymmetric cryptographic algorithms that generate a pair of separate keys (a key pair), one "private" and the other "public". You keep the private key a secret and store it on the computer you use to connect to the remote system. Conceivably, you can share the public key with anyone without compromising the private key
+
+    * Create a key pair for the new user
+        ssh-keygen -t rsa -b 4096 -f <file-name>
+
+        we get 2 files one if private <file-name> and public <file-name>.pub keys and make the  <file-name> to <file-name>.pem to remember as private key
+    * create a user 
+        useradd <user-name>
+    * create a dir named '.ssh' under the user home dir
+        mkdir -p /home/<user-name>/.ssh
+    * copy the public key in 'authorized_keys file'
+       vi /home/<user-name>/.ssh/authorized_keys
+    * change the owner and permission to that '.ssh' folder
+        chown -R <user-name>:<user-name> /home/<user-name>/.ssh/authorized_keys
+        chmod -R 600 /home/<user-name>/.ssh/authorized_keys
+    * try to acces now
+        ssh -i  <file-name>.pem <user-name>@<IP>

@@ -1,0 +1,64 @@
+LINUX USER MANAGEMNET:
+================================
+A user is an entity, in a Linux operating system, that can manipulate files and perform several other operations. 
+Each user is assigned an ID that is unique for each user in the OS. In this post, you will learn about users and their info.
+
+ID 0 is assigned to the root user and the IDs 1 to 999 (both inclusive) are assigned to the system users and hence the ids for local user begins from 1000 onwards. 
+
+SYSTEM USERS : are created by the system during installation and are used to run system services and applications.
+REGULAR USERS: are created by the administrator and can access the system and its resources based on their permissions.
+
+--> Discussing the below topics
+    1. add user and password
+    2. add/delete group
+    3. add/delete user to other group
+    4. give root access to user
+    5. delete user
+
+
+1. ADD USER and PASSWORD
+--------------
+login wiht root user 
+ 
+    useradd <user-name> --> to add user
+    id <user-name>      --> to check the user(will get the this info)   uid=1001(user-name) gid=1001(user-name) groups=1001(user-name)
+    passwd <user-name>  --> to set the password for that user (User accounts require passwords to authenticate and access the system)
+
+After creating this we can login with new user with password to that machine
+    ssh <user-name>@<ip> --> user the password once prompt
+
+while creating a user , a default group will be created with the same user-name.
+
+2.ADD/DELETE GROUP
+--------------
+The group membership determines which system resources the user can access, as well as which users can access the user's files.
+
+    groupadd <group-name> --> to create the group
+    getent group          --> to get the groups info
+    groupdel <group-name> --> to delete the group (NOTE: before deleting the user make sure no user has associated with this group)
+
+3. ADD/DELETE USERS TO OTHER GROUP
+----------------------------------
+A user can belong to any no of secondary groups (including none). Secondary groups are created to manage individual files and software applications. Members of the group inherit the read, write, and execute privileges for that group.
+
+we can't delete user from his primary group instaed we can change
+
+useradd –G <new_group-name> <user-name> or usermod –g <new_group-name> <user-name>  --> adding user to a group
+usermod –aG <new_group-name> <user-name> -->  to add secodary group
+gpasswd -d <user-name> <group-name> --> to user from a group
+
+4. GIVE ROOT ACCESS TO USER
+    * change the below string on the /etc/sudoers file to access user 
+    <user-name> ALL=(ALL:ALL) NOPASSWD: ALL
+    * in other way we can add to the wheel group
+        usermod -aG wheel <user-name>
+     
+5. DELETE USER
+    You can remove old users from your Linux server. This will revoke the user's SSH access, and remove that user's file and directory ownership.
+
+    * First delete the user secondary groups
+       gpasswd -d <user-name> <group-name>
+    * change the user primary group to his group
+       usermod -g <user-name> <user-name>
+    * delete the user 
+      userdel <user-name>

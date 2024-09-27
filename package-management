@@ -1,0 +1,39 @@
+PACKAGE MANAGEMENT:
+=====================
+A package manager is a command-line or graphical tool used to automate the process of installing, updating, and removing software packages on a Linux system. Software packages are collections of files, including executables, libraries, configuration files, and documentation, that are bundled together for easy distribution and installation
+
+Functionalities of Package Manager in Linux:
+----------------------------------------------
+INSTALLATION: Package managers facilitate the installation of software packages from repositories or local files. They automatically handle dependencies, ensuring that all required components are installed.
+DEPENDENCY RESOLUTION: Linux software often relies on other packages. Package managers detect these dependencies and fetch and install them automatically.
+UPGRADING: Package managers allow users to update installed software to the latest versions. This helps in keeping the system secure and up-to-date.
+UNINSTALL: Uninstalling software is straightforward with package managers. They ensure that all related files and dependencies are removed, preventing conflicts.
+QUERYING: Users can query the package manager to get information about installed packages, available updates, and package details.
+
+Most Widely used Package Manager in Linux:
+===========================================
+    APT (Advanced Package Tool):    Using APT to Manage Packages in Debian and Ubuntu
+    ------------------------------
+        sudo apt-get install <<package-name>> --> Installing a package
+        sudo apt-get update                   --> Updating the package list
+        sudo apt-get upgrade                  --> Upgrading packages
+        sudo apt-get remove <<package-name>>  --> Removing a package
+        sudo apt-cache search <<package-name>> --> Searching for packages
+
+    YUM (Yellowdog Updater, Modified): Using YUM to Manage Packages in CentOS/RHEL 7 and Earlier
+    -----------------------------------
+        sudo yum install <package-name> --> Installing a package    
+        sudo yum update                 --> Upgrading packages
+        sudo yum remove <package-name>  --> Removing a package
+        sudo yum list all               --> to get all the package list
+        sudo yum list installed         --> to ge the installed packages
+        sudo yum list available         --> to get the avilable package list(not installed)
+
+    dnf Package Manager:    Using DNF to Manage Packages in CentOS/RHEL 8 and Fedora
+    ---------------------
+    dnf is the successor to YUM and is now the recommended package manager for Fedora-based distributions. It provides a more modern and user-friendly experience. The syntax and commands for dnf are similar to yum.
+
+        sudo dnf install <<package-name>> --> Installing a package
+        sudo dnf update                   --> Updating the package list
+        sudo dnf upgrade                  --> Upgrading packages
+        sudo dnf remove <<package-name>>  --> Removing a package
